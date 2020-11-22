@@ -6,15 +6,18 @@
   visible-width: 32px; //amount visible before hover
   spacing: $base_spacing;
   padding: $base_padding;
-  border-color: transparent; // Yaru: adapt the workspace osd border to the dock border
+  // border-color: transparent; // Yaru: adapt the workspace osd border to the dock border
 
-  border-radius: $modal_radius 0 0 $modal_radius;
-  border-right-width: 0;
+  // //border-radius: $modal_radius 0 0 $modal_radius;
+  // border-radius: 0;
+  // border-right-width: 0;
 
-  &:rtl {
-    border-radius: 0 $modal_radius $modal_radius 0;
-    border-left-width: 0;
-  }
+  // &:rtl {
+  //   //border-radius: 0 $modal_radius $modal_radius 0;
+  //   border-left-width: 0;
+  // }
+  //@include border_side(2px, darken($osd_bg_color, 20%), right);
+  border-radius: 0;
 
   // drag and drop indicator
   .placeholder {
@@ -26,8 +29,12 @@
 
 // selected indicator
 .workspace-thumbnail-indicator {
-  border: 3px solid $selected_bg_color;
-  border-radius: 3px;
+  //border: 3px solid $selected_bg_color;
+  @include border_side(3px, white, left);
+  //border-left-color: white;
+  //border-radius: 3px;
+  border-radius: 0;
   padding: 0px;
+  background: transparent;
   // background-color: transparentize($selected_bg_color, 0.9);
 }

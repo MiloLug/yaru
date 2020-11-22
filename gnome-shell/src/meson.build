@@ -8,7 +8,7 @@ styles = [
   'gnome-shell-high-contrast',
 ]
 variants = [
-  'light',
+  #'light',
   'dark',
 ]
 

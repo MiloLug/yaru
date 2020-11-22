@@ -496,8 +496,8 @@
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
-
-  box-shadow: inset 0 1px $hc; // top highlight
+//Void change: remove window top border
+  box-shadow: 0 -2px $hc; // top highlight
 }
 
 @mixin overshoot($p, $t:normal, $c:$fg_color) {

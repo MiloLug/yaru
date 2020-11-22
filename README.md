@@ -1,3 +1,10 @@
+## Notes
+commented "light" in gnome-shell/meson.build
+
+options "default" and "light" = false (meson_options)
+
+removed "default" flavour from gtk/meson.build
+
 # Ubuntu Yaru theme suite
 
 Snap build status: [![Build Status](https://travis-ci.org/ubuntu/yaru.svg?branch=master)](https://travis-ci.org/ubuntu/yaru)

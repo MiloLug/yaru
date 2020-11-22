@@ -13,6 +13,7 @@
   //font-size: ($size / $base) * 1rem;
 }
 
+
 @mixin draw_shadows($shadow1, $shadow2:none, $shadow3:none, $shadow4:none) {
 //
 // Helper function to stack up to 4 box-shadows;
@@ -226,4 +227,18 @@
       background-color: transparentize(darken($osd_bg_color, 10%), .5);
     }
   }
+}
+
+
+// Void additions
+
+
+// Void: sided border generator
+@mixin border_side($width, $color, $side:top) {
+  border: $width solid $color;
+  @if $side!=top {border-top-width: 0;}
+  @if $side!=left {border-left-width: 0;}
+  @if $side!=right {border-right-width: 0;}
+  @if $side!=bottom {border-bottom-width: 0;}
+  //font-size: ($size / $base) * 1rem;
 }
