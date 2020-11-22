@@ -1586,9 +1586,9 @@ headerbar {
   @include headerbar_fill(darken($bg_color, 10%));
 
   &:backdrop {
-    border-color: $backdrop_borders_color;
-    background-color: $bg_color;
-    background-image: none;
+//Void: hilight the window when it is backdrop    
+    @include headerbar_fill(darken($bg_color, 10%), lighten($bg_color, 15%));
+    
 //Void: borders
     //box-shadow: inset 0 1px $top_hilight;
 
@@ -1751,8 +1751,6 @@ headerbar {
       }
     }
   }
-
-  // squared corners when the window is maximized, tiled, or fullscreen
   .tiled &,
   .tiled-top &,
   .tiled-right &,
@@ -1760,6 +1758,10 @@ headerbar {
   .tiled-left &,
   .maximized &,
   .fullscreen & {
+
+//Void: disable window's hilightning and set background as of panel (top bar)
+    @include headerbar_fill($cod_gray);
+
     &:backdrop, & {
       border-radius: 0;
     }
@@ -1892,26 +1894,27 @@ headerbar { // headerbar border rounding
 
 // Development versions of apps to use a differently styled headerbar
 
-window.devel {
-  headerbar.titlebar:not(.selection-mode) {
-    $c: darken($bg_color, 10%);
-    $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-               linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8)),
-               linear-gradient(to top, darken($c, 3%), $c 3px, lighten($c, 6%));
-    @if $variant == 'dark' {
-      $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-                 linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
-                 linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
-    }
+// window.devel {
+//   headerbar.titlebar:not(.selection-mode) {
 
-    background: $bg_color $gradient;
+//     $c: darken($bg_color, 10%);
+//     $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+//                linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8)),
+//                linear-gradient(to top, darken($c, 3%), $c 3px, lighten($c, 6%));
+//     @if $variant == 'dark' {
+//       $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+//                  linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
+//                  linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
+//     }
 
-    &:backdrop {
-      background: $bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-                  image($bg_color); /* background-color would flash */
-    }
-  }
-}
+//     background: $bg_color $gradient;
+
+//     &:backdrop {
+//       background: $bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
+//                   image($bg_color); /* background-color would flash */
+//     }
+//   }
+// }
 
 /************
  * Pathbars *
@@ -3985,8 +3988,10 @@ messagedialog { // Message Dialog styling
   &.csd { // rounded bottom border styling for csd version
     &.background {
       // bigger radius for better antialiasing
-      border-bottom-left-radius: $window_radius+1;
-      border-bottom-right-radius: $window_radius+1;
+      //Void:
+      // border-bottom-left-radius: $window_radius+1;
+      // border-bottom-right-radius: $window_radius+1;
+      border-radius:0;
     }
 
     .dialog-action-area button {
@@ -4611,8 +4616,8 @@ decoration {
 
   .csd.popup & {
     border-radius: $menu_radius;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                0 0 0 1px transparentize($_wm_border, 0.1);
+    box-shadow: 0 1px 2px transparentize(black, 0.8);
+               // 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
   tooltip.csd & {
@@ -4622,8 +4627,8 @@ decoration {
 
   messagedialog.csd & {
     border-radius: $window_radius;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                0 0 0 1px transparentize($_wm_border, 0.1);
+    box-shadow: 0 1px 2px transparentize(black, 0.8);
+               // 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
   .solid-csd & {

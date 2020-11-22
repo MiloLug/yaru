@@ -1145,8 +1145,11 @@ GtkComboBox {
   border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
   border-top-color: $inkstone;
   border-style: solid;
-  border-width: 1px 1px 0 1px;
-  border-radius: 7px 7px 0 0;
+
+  //border-width: 1px 1px 0 1px;
+  border-width: 0 0 0 0;
+  //border-radius: 7px 7px 0 0;
+  border-radius: 0;
   background-color: $headerbar_bg_color;
   background-image: none;
   box-shadow: none;
