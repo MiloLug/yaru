@@ -1140,30 +1140,24 @@ GtkComboBox {
 
 .titlebar,
 .header-bar {
-  padding: 0 6px;
-  //min-height: 40px;
-  border-color: transparentize(_border_color($headerbar_bg_color), 0.7);
-  border-top-color: $inkstone;
-  border-style: solid;
 
-  //border-width: 1px 1px 0 1px;
-  border-width: 0 0 0 0;
-  //border-radius: 7px 7px 0 0;
+  padding: 0 6px;
+ 
+//Void: borders
+  border: none;
+  //border-width: 0 0 1px;
+  //border-style: solid;
   border-radius: 0;
-  background-color: $headerbar_bg_color;
-  background-image: none;
-  box-shadow: none;
   color: $headerbar_fg_color;
-  @if $variant=='dark' {
-    &:backdrop {
-      box-shadow: inset 0 -1px 0 0 transparentize($backdrop_borders_color,0.2);
-    }
-  }
+  @include headerbar_fill(darken($bg_color, 10%));
 
   &:backdrop {
-    background-color: $backdrop_headerbar_bg_color;
-    border-color: transparentize(_border_color($backdrop_headerbar_bg_color), 0.7);
-    color: $backdrop_fg_color;
+//Void: hilight the window when it is backdrop    
+    @include headerbar_fill(darken($bg_color, 10%), lighten($bg_color, 15%));
+    
+//Void: borders
+    //box-shadow: inset 0 1px $top_hilight;
+
     transition: $backdrop_transition;
   }
 
@@ -1309,7 +1303,12 @@ GtkComboBox {
   }
 
   .tiled &, .maximized & {
-    border-radius: 0; // squared corners when the window is max'd or tiled
+//Void: disable window's hilightning and set background as of panel (top bar)
+    @include headerbar_fill($cod_gray);
+
+    &:backdrop, & {
+      border-radius: 0;
+    }
   }
 
   &.default-decoration {

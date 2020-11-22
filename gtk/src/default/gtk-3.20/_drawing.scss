@@ -482,7 +482,7 @@
   }
 }
 
-@mixin headerbar_fill($c:$headerbar_color, $hc:$top_hilight, $ov: none) {
+@mixin headerbar_fill($c:$headerbar_color, $hc:transparent, $ov: none) {
 //
 // headerbar fill
 //

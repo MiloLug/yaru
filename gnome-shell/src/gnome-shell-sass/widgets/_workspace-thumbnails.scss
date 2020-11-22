@@ -30,7 +30,7 @@
 // selected indicator
 .workspace-thumbnail-indicator {
   //border: 3px solid $selected_bg_color;
-  @include border_side(3px, white, left);
+  @include border_side(3px, $selected_bg_color, right);
   //border-left-color: white;
   //border-radius: 3px;
   border-radius: 0;
