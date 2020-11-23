@@ -103,12 +103,12 @@ $insensitive_borders_color: mix($borders_color, $bg_color, 90%);
 $backdrop_base_color: if($variant == 'light', darken($base_color, 1%), lighten($base_color, 5%));
 $backdrop_text_color: mix($text_color, $backdrop_base_color, 80%);
 $backdrop_bg_color: lighten($bg_color, 5%);
-$backdrop_fg_color: mix($fg_color, $backdrop_bg_color, 90%);
+$backdrop_fg_color: mix($fg_color, $bg_color, 70%);
 $backdrop_insensitive_color: lighten($backdrop_bg_color, 15%);
 $backdrop_selected_fg_color: $backdrop_text_color;
 $backdrop_borders_color: mix($borders_color, $backdrop_bg_color, 40%);
-$backdrop_dark_fill: lighten(mix($backdrop_borders_color, $backdrop_bg_color, 35%), 30%);
-$backdrop_sidebar_bg_color: mix($backdrop_bg_color, $backdrop_base_color, 50%);
+$backdrop_dark_fill: lighten(mix($backdrop_borders_color, $backdrop_bg_color, 35%), 10%);
+$backdrop_sidebar_bg_color: mix($backdrop_bg_color, $backdrop_base_color, 80%);
 
 $backdrop_scrollbar_bg_color: darken($backdrop_bg_color, 3%);
 $backdrop_scrollbar_slider_color: mix($backdrop_fg_color, $backdrop_bg_color, 40%);
