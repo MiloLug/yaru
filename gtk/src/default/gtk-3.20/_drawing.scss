@@ -386,7 +386,7 @@
   //
     $_bg: if($c != $bg_color, transparentize($c, 0.5), lighten($osd_bg_color, 9%)); // Yaru change: make osd buttons visible
 
-    color: $osd_fg_color;
+    color: $osd_text_color;
     border-color: $osd_borders_color;
     background-color: transparent;
     $button_fill: image($_bg) !global;
@@ -455,7 +455,7 @@
   //
     $_bg: if($c != $bg_color, transparentize($c, 0.5), $osd_bg_color);
 
-    color: $osd_fg_color;
+    color: $osd_text_color;
     border-color: $osd_borders_color;
     background-color: transparent;
     $button_fill: image($_bg) !global;

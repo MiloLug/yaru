@@ -1,32 +1,55 @@
 /* Popovers/Menus */
+//Void:
+$popover_padding_start: $base_padding * 3;
+$popover_padding_end: $base_padding * 5;
 
 $popover_arrow_height: 12px;
 
 //.the popover itself
 .popup-menu-boxpointer {
-  -arrow-border-radius: $base_border_radius + 2; // Yaru: we have less round popovers
-  -arrow-background-color: $bg_color;
-  -arrow-border-width: 1px;
-  -arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color); // Yaru: we need a black-based border for the light theme
-  -arrow-base: $popover_arrow_height * 2;
-  -arrow-rise: $popover_arrow_height;
-  -arrow-box-shadow: 0 1px 3px rgba(0,0,0,0.5); // dreaming bugzilla #689995
+  //-arrow-border-radius: $base_border_radius + 2; // Yaru: we have less round popovers
+// //Void:
+//   -arrow-border-radius: 0;
+//   -arrow-background-color: darken($bg_color, 50%);
+//   -arrow-border-width: 1px;
+//   //-arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color); // Yaru: we need a black-based border for the light theme
+// //Void:
+//   -arrow-border-color: $borders_color; // Yaru: we need a black-based border for the light theme
+//   -arrow-base: $popover_arrow_height * 2;
+//   -arrow-rise: $popover_arrow_height;
+//   -arrow-box-shadow: 0px 11px 19px 7px rgba(0, 0, 0, 0.5), 
+//                       inset 0px 2px white; // dreaming bugzilla #689995
+
+  -arrow-border-radius: 0;
+  -arrow-background-color: transparent;
+  -arrow-border-width: 0;
+  -arrow-box-shadow: none;
+  -arrow-base: 0;
+  -arrow-rise: 0;
+
+  padding: 0;
+  background-color: lighten($panel_bg_color, 4%);
+  @include border_side(2px, lighten($panel_bg_color, 50%), bottom);
+//                       inset 0px 2px white; // dreaming bugzilla #689995
 }
 
 // container of the popover menu
 .popup-menu {
   min-width: 15em;
   color: $fg_color;
+  //box-shadow: 0px 0px 25px -4px rgba(0,0,0,0.75);
+  
 
   //.popup-status-menu-item { font-weight: normal;  color: pink; } //dunno what that is
   &.panel-menu {
     -boxpointer-gap: $base_margin; // distance from the panel
-    margin-bottom: 1.75em;
+    margin-bottom: $base_padding;
+    box-shadow: 0px 0px 25px -4px rgba(0,0,0,0.75);
   }
 }
 
 .popup-menu-content {
-  padding: $base_padding * 2 + $base_margin 0;
+  padding: $base_padding + $base_margin 0;
 }
 
 // menu items
@@ -34,17 +57,31 @@ $popover_arrow_height: 12px;
   spacing: $base_padding;
   padding: $base_padding;
 
-  &:ltr { padding-right:1.75em; padding-left: 0; }
-  &:rtl { padding-right: 0; padding-left:1.75em; }
+  &:ltr { 
+    padding-right: $popover_padding_end;
+    padding-left: $popover_padding_start;
+  }
+  &:rtl {
+    padding-right: $popover_padding_start;
+    padding-left: $popover_padding_end;
+  }
 
   &:checked { // Yaru: sub menus need to be more visible
-    background-color: $bg_color,;
+    background-color: $bg_color;
     box-shadow: none;
   }
 
   &.selected { // Yaru: we want shell popups to feeld like menus -> gray hover
     background-color: $hover_bg_color;
     color: $fg_color;
+    &:ltr {
+      @include border_side(2px, $selected_bg_color, left);
+      padding-left: $popover_padding_start - 2px;
+    }
+    &:rtl {
+      @include border_side(2px, $selected_bg_color, right);
+      padding-right: $popover_padding_start - 2px;
+    }
   }
 
   &:active { // Yaru: we want shell popups to feeld like menus -> no orange
@@ -68,7 +105,7 @@ $popover_arrow_height: 12px;
 
 // popover submenus
 .popup-sub-menu {
-  background-color: darken($bg_color, 3%);
+  background-color: $panel_bg_color;
   box-shadow: none;
   border-top: 1px solid transparentize($borders_color, 0.2);
   border-bottom: 1px solid transparentize($borders_color, 0.2);
@@ -76,7 +113,7 @@ $popover_arrow_height: 12px;
 
 // container for radio and check boxes
 .popup-menu-ornament {
-  width: 1.2em;
+  width: 0;
 
   &:ltr { text-align: right };
   &:rtl { text-align: left };

@@ -5,14 +5,14 @@ options "default" and "light" = false (meson_options)
 
 removed "default" flavour from gtk/meson.build
 
-##TODO
+## TODO
 - global:
   - clean up the styles... oh my GOD help me on this way of blood tears
 - styles:
-  - all in the top bar (panel)
+  - + all in the top bar (panel)
   - window picker in the... i don't know how it's called right. Start menu
-  - all these menus (These panels when you right click or something... you know)
-  - correct the schema to avoid merging of parts of the interface
+  - + all these menus (These panels when you right click or something... you know)
+  - + correct the schema to avoid merging of parts of the interface
 
 # Ubuntu Yaru theme fork - Void (only -dark yet)
 

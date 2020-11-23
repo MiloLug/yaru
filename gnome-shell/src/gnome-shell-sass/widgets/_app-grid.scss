@@ -49,7 +49,7 @@ $app_grid_fg_color: #fff;
     & .folder-name-entry {
       font-size: 18pt;
       font-weight: 800;
-      color: $osd_fg_color; // Yaru change: needed for light theme, otherwise invisible text
+      color: $osd_text_color; // Yaru change: needed for light theme, otherwise invisible text
     }
     // Yaru change: needed for the light theme, otherwise dark text in orange selection, can't set selected-color here
     & .folder-name-entry { width: 300px; background-color: lighten($osd_bg_color, 4%); border-color: $osd_outer_borders_color;}

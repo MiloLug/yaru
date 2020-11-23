@@ -46,7 +46,7 @@ $default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on bot
 
   &:grayed { //FIXMEy
     background-color: darken($bg_color, 3%);
-    color: $osd_fg_color;
+    color: $osd_text_color;
     border-color: $osd_borders_color;
   }
 
@@ -71,7 +71,7 @@ $default_key_bg_color: $key_bg_color; // Yaru: Make keyboard buttons work on bot
 
 // long press on a key popup
 .keyboard-subkeys { // Yaru: Make keyboard popups work on both variants
-  color: $osd_fg_color;
+  color: $osd_text_color;
   -arrow-border-radius: $modal_radius;
   -arrow-background-color: transparentize(if($variant=='light', darken($bg_color, 5%), darken($bg_color, 8%)), 0.1);
   -arrow-border-width: 1px;
