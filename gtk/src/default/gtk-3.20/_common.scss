@@ -1,6 +1,10 @@
 @function gtkalpha($c,$a) {
   @return unquote("alpha(#{$c},#{$a})");
 }
+// padding, margin and spacing
+$base_padding: 6px;
+$base_margin: 4px;
+$base_spacing: 6px;
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
@@ -1583,11 +1587,11 @@ headerbar {
   border-color: $alt_borders_color;
   border-radius: 0;
 
-  @include headerbar_fill(darken($bg_color, 10%), lighten($bg_color, 15%));
+  @include headerbar_fill($headerbar_bg_color, lighten($headerbar_bg_color, 15%));
 
   &:backdrop {
 //Void: hilight the window when it is backdrop    
-    @include headerbar_fill($bg_color, lighten($bg_color, 20%));
+    @include headerbar_fill($backdrop_headerbar_bg_color, lighten($backdrop_headerbar_bg_color, 15%));
     
 //Void: borders
     //box-shadow: inset 0 1px $top_hilight;
@@ -1763,7 +1767,7 @@ headerbar {
     @include headerbar_fill($cod_gray);
 
     &:backdrop {
-      @include headerbar_fill($bg_color);
+      //@include headerbar_fill($bg_color);
     }
   }
 
@@ -2213,11 +2217,15 @@ menubar,
 
 menu,
 .menu,
+//Void: TODO cod gray -> panel_bg_color
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 4px 0px;
-  background-color: $menu_color;
-  border: 1px solid $borders_color; // adds borders in a non composited env
+  // background-color: $menu_color;
+  // border: 1px solid $borders_color; // adds borders in a non composited env
+  background-color: lighten($cod_gray, 4%);
+  @include border_side(2px, lighten($cod_gray, 50%), bottom);
+  margin-bottom: $base_padding;
 
   .csd & {
     border: none; // axes borders in a composited env
@@ -2324,28 +2332,34 @@ menuitem {
 /***************
  * Popovers   *
  ***************/
-
+//Void: TODO replace cod gray by panel_bg_color
 popover.background {
-  padding: 2px;
+  //padding: 2px;
+  padding:0;
   background-color: $popover_bg_color;
-
   .csd &, & {
-    border: 1px solid $borders_color;
-    border-radius: $popover_radius;
+    
+    //border: 1px solid $borders_color;
+    //border-radius: $popover_radius;
+    border-radius: 0;
+    background-color: lighten($cod_gray, 4%);
+    @include border_side(2px, lighten($cod_gray, 50%), bottom);
+    margin-bottom: $base_padding;
   }
 
   .csd & {
-    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+    //border: 2px solid white;
+    //$_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
 
-    background-clip: padding-box;
-    border-color: $_popover_border;
+    //background-clip: padding-box;
+    //border-color: $_popover_border;
   }
 
   box-shadow: 0 1px 2px transparentize(black, 0.7);
-
+//Void: TODO replace the backdrop color by the popover backdrop color
   &:backdrop {
     background-color: $backdrop_bg_color;
-    box-shadow: none;
+    box-shadow: 0 1px 2px transparentize(black, 0.8);
   }
 
   > list,
@@ -2651,6 +2665,9 @@ notebook {
  **************/
 scrollbar {
   $_slider_min_length: 40px;
+  $_slider_min_width: 4px;
+  $_slider_full_width: 10px;
+  $_scroll_button_size: 10px;
 
   // disable steppers
   @at-root * {
@@ -2662,10 +2679,11 @@ scrollbar {
   transition: 300ms $ease-out-quad;
 
   // scrollbar border
-  &.top { border-bottom: 1px solid $borders_color; }
-  &.bottom { border-top: 1px solid $borders_color; }
-  &.left { border-right: 1px solid $borders_color; }
-  &.right { border-left: 1px solid $borders_color; }
+  // &.top { border-bottom: 1px solid $borders_color; }
+  // &.bottom { border-top: 1px solid $borders_color; }
+  // &.left { border-right: 1px solid $borders_color; }
+  // &.right { border-left: 1px solid $borders_color; }
+  border: none;
 
   &:backdrop {
     background-color: $backdrop_scrollbar_bg_color;
@@ -2673,17 +2691,29 @@ scrollbar {
     transition: $backdrop_transition;
   }
 
+  //Void: make the scrollbar block to be wider than the slider
+  &.horizontal {
+    min-height: $_slider_full_width;
+  }
+
+  &.vertical {
+    min-width: $_slider_full_width;
+  }
+
   // slider
   slider {
-    min-width: 6px;
-    min-height: 6px;
-    margin: -1px;
-    border: 4px solid transparent;
-    border-radius: 8px;
+    // min-width: 4px;
+    // min-height: 4px;
+    // //margin: -1px;
+    //border: 4px solid transparent;
+    border:none;
+    //Void: no ROUNDS
+    //border-radius: 8px;
+    border-radius:0;
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
 
-    &:hover { background-color: $scrollbar_slider_hover_color; }
+    &:hover{ background-color: $scrollbar_slider_hover_color; }
 
     &:hover:active { background-color: $scrollbar_slider_active_color; }
 
@@ -2691,79 +2721,90 @@ scrollbar {
 
     &:disabled { background-color: transparent; }
   }
-
-  &.fine-tune {
-    slider {
-      min-width: 4px;
-      min-height: 4px;
+  //Void: when scrollbar in :hover state -> expand the slider
+  &.vertical{
+    slider{
+      margin-left: ($_slider_full_width - $_slider_min_width) / 2;
+      min-width: $_slider_min_width;
+      min-height: $_slider_min_length;
+      transition: min-width .2s;
     }
 
-    &.horizontal slider { border-width: 5px 4px; }
-    &.vertical slider { border-width: 4px 5px; }
+    &:hover, &.hovering, &.dragging{
+      slider{
+        margin-left: 0;
+        min-width: $_slider_full_width;
+      }
+    }
   }
 
+  &.horizontal{
+    slider{
+      margin-top: ($_slider_full_width - $_slider_min_width) / 2;
+      min-height: $_slider_min_width;
+      min-width: $_slider_min_length;
+      transition: min-height .2s;
+    }
+    
+    &:hover, &.hovering, &.dragging{
+      slider{
+        margin-top: 0;
+        min-height: $_slider_full_width;
+      }
+    }
+  }
+
+  // &.fine-tune {
+  //   slider {
+  //     min-width: 4px;
+  //     min-height: 4px;
+  //   }
+
+  //   &.horizontal slider { border-width: 5px 4px; }
+  //   &.vertical slider { border-width: 4px 5px; }
+  // }
   &.overlay-indicator {
     &:not(.dragging):not(.hovering) {
       border-color: transparent;
       opacity: 0.4;
       background-color: transparent;
 
-      slider {
-        margin: 0;
-        min-width: 3px;
-        min-height: 3px;
-        background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
-      }
-
       button {
-        min-width: 5px;
-        min-height: 5px;
+        min-width: $_scroll_button_size;
+        min-height: $_scroll_button_size;
         background-color: $fg_color;
         background-clip: padding-box;
         border-radius: 100%;
-        border: 1px solid if($variant == 'light', white, black);
+        border: 1px solid black;
         -gtk-icon-source: none;
       }
 
       &.horizontal {
-        slider {
-          margin: 0 2px;
-          min-width: $_slider_min_length;
-        }
-
         button {
-          margin: 1px 2px;
-          min-width: 5px;
+          margin: 1px 0px;
+          min-width: $_scroll_button_size;
         }
       }
 
       &.vertical {
-        slider {
-          margin: 2px 0;
-          min-height: $_slider_min_length;
-        }
-
         button {
-          margin: 2px 1px;
-          min-height: 5px;
+          margin: 2px 0px;
+          min-height: $_scroll_button_size;
         }
       }
     }
 
     &.dragging,
-    &.hovering { opacity: 0.8; }
+    &.hovering {
+      background-color: $scrollbar_bg_color;
+      opacity: 0.8;
+    }
   }
-
-  &.horizontal slider { min-width: $_slider_min_length; }
-
-  &.vertical slider { min-height: $_slider_min_length; }
-
   // button styling
   button {
     padding: 0;
-    min-width: 12px;
-    min-height: 12px;
+    min-width: $_scroll_button_size;
+    min-height: $_scroll_button_size;
     border-style: none;
     border-radius: 0;
     transition-property: min-height, min-width, color;

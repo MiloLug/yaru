@@ -1149,11 +1149,11 @@ GtkComboBox {
   //border-style: solid;
   border-radius: 0;
   color: $headerbar_fg_color;
-  @include headerbar_fill(darken($bg_color, 10%), lighten($bg_color, 15%));
+  @include headerbar_fill($headerbar_bg_color, lighten($headerbar_bg_color, 15%));
 
   &:backdrop {
 //Void: hilight the window when it is backdrop    
-    @include headerbar_fill($bg_color, lighten($bg_color, 20%));
+    @include headerbar_fill($backdrop_headerbar_bg_color, lighten($backdrop_headerbar_bg_color, 15%));
     
 //Void: borders
     //box-shadow: inset 0 1px $top_hilight;
@@ -1307,7 +1307,7 @@ GtkComboBox {
     @include headerbar_fill($cod_gray);
 
     &:backdrop {
-      @include headerbar_fill(darken($bg_color, 3%));
+      
     }
   }
 
@@ -1737,9 +1737,10 @@ column-header.button.dnd { // for treeview-like derive widgets
 .menubar {
   -GtkWidget-window-dragging: true;
   $_border_color: _border_color($menubar_bg_color);
-
+  //Void: TEST
   background-color: $menubar_bg_color;
-  border-color: transparentize($_border_color, 0.8);
+  //border-color: transparentize($_border_color, 0.8);
+  border-color: red !important;
   border-style: solid;
   border-width: 0 1px;
   box-shadow: inset 0 -1px transparentize($_border_color, 0.8);
@@ -1755,11 +1756,13 @@ column-header.button.dnd { // for treeview-like derive widgets
     transition: 100ms ease;
     transition-property: box-shadow, color;
     padding: 4px 8px;
-
+//Void:
     .menu {
-      border-radius: 0 0 $small_radius $small_radius;
+      //border-radius: 0 0 $small_radius $small_radius;
+      border-radius: 0;
       .menu {
-        border-radius: $small_radius;
+        //border-radius: $small_radius;
+        border-radius: 0;
       }
     }
 
@@ -1779,7 +1782,9 @@ column-header.button.dnd { // for treeview-like derive widgets
   padding: 0px;
   background-color: $menu_color;
   color: $text_color;
-  border: 1px solid $borders_color; // adds borders in a non composited env
+  //Void: TEST
+  //border: 1px solid $borders_color; // adds borders in a non composited env
+  border: 1px solid yellow !important;
   border-radius: $small_radius;
   .csd & { border: none; }  // axes borders in a composited env
   &:backdrop { background-color: $backdrop_menu_color; color: $backdrop_text_color; }
@@ -1789,6 +1794,8 @@ column-header.button.dnd { // for treeview-like derive widgets
     text-shadow: none;
     padding: 4px;
     border-radius: 0;
+    //Void: TEST
+    border: 1px solid blue !important;
     &:hover {
       color: inherit;
       background-color: $base_hover_color;
@@ -1829,8 +1836,10 @@ column-header.button.dnd { // for treeview-like derive widgets
 
 .popover {
   padding: 2px;
-  border: 1px solid $borders_color;
-  border-radius: 5px;
+  //border: 1px solid $borders_color;
+  border: none;
+  //border-radius: 5px;
+  border-radius: 0;
   background-color: mix($bg_color, $base_color, 50%);
 
   box-shadow: 0 1px 2px transparentize(black, 0.7);
@@ -3479,7 +3488,9 @@ GtkVolumeButton.button {
  *********************/
 
 .window-frame {
-  border-radius: 7px 7px 0 0;
+  //Void: NO ROUNDED CORNERS
+  //border-radius: 7px 7px 0 0;
+  border-radius: 0;
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
@@ -3513,13 +3524,13 @@ GtkVolumeButton.button {
   }
   // server-side decorations as used by mutter
   &.ssd {
-    box-shadow: 0 0 0 1px $_wm_border; //just doing borders, wm draws actual shadows
+    //box-shadow: 0 0 0 1px $_wm_border; //just doing borders, wm draws actual shadows
   }
   &.csd {
     &.popup {
       border-radius: 0;
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border,0.1);
+      box-shadow: 0 1px 2px transparentize(black, 0.8);
+                  //0 0 0 1px transparentize($_wm_border,0.1);
     }
     &.tooltip {
       border-radius: 5px;
@@ -3527,8 +3538,8 @@ GtkVolumeButton.button {
     }
     &.message-dialog {
       border-radius: 7px;
-      box-shadow: 0 1px 2px transparentize(black, 0.8),
-                  0 0 0 1px transparentize($_wm_border,0.1);
+      box-shadow: 0 1px 2px transparentize(black, 0.8);
+                  //0 0 0 1px transparentize($_wm_border,0.1);
     }
   }
   &.solid-csd {

@@ -6,11 +6,15 @@ StScrollView {
 }
 
 StScrollBar {
+  $_slider_min_length: 40px;
+  $_slider_min_width: 4px;
+  $_slider_full_width: 10px;
+
   padding: 0;
 
   StScrollView & {
-    min-width: 14px;
-    min-height: 14px;
+    min-width: $_slider_full_width;
+    min-height: $_slider_full_width;
   }
 
   StBin#trough {
@@ -19,11 +23,32 @@ StScrollBar {
   }
 
   StButton#vhandle, StButton#hhandle {
-    border-radius: 8px;
+    //Void: no rounds...
+    //border-radius: 8px;
+    border-radius: 0;
     background-color: mix($fg_color, $bg_color, 60%);
     //border: 3px solid transparent; //would be nice to margin or at least to transparent
-    margin: 3px;
+    margin: 0;
     &:hover { background-color: mix($fg_color, $bg_color, 80%); }
     &:active { background-color: $selected_bg_color; }
+  }
+
+  StButton#hhandle{
+    height: $_slider_min_width;
+    margin: ($_slider_full_width - $_slider_min_width) / 2, 0px;
+    transition: margin .2s;
+
+    &:hover, &:active{
+      margin: 0px, 0px;
+    }
+  }
+  StButton#vhandle{
+    width: $_slider_min_width;
+    margin: 0px, ($_slider_full_width - $_slider_min_width) / 2;
+    transition: margin .2s;
+    
+    &:hover, &:active{
+      margin: 0px, 0px;
+    }
   }
 }
