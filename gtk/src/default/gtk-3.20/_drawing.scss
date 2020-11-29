@@ -482,24 +482,6 @@
   }
 }
 
-@mixin headerbar_fill($c:$headerbar_color, $hc:transparent, $ov: none) {
-//
-// headerbar fill
-//
-// $c:  base color
-// $hc: top highlight color
-// $ov: a background layer for background shorthand (hence no commas!)
-//
-  $gradient: linear-gradient(to top, $c, $c); // Yaru change: no gradients
-
-  //@if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 3%), lighten($c, 3%)); } // Yaru change: no gradients
-
-  @if $ov != none { background: $c $ov, $gradient; }
-  @else { background: $c $gradient; }
-//Void change: remove window top border
-  box-shadow: inset 0 2px $hc; // top highlight
-}
-
 @mixin overshoot($p, $t:normal, $c:$fg_color) {
 //
 // overshoot
@@ -636,19 +618,4 @@
     border-color: $insensitive_borders_color;
     background-image: image($insensitive_bg_color);
   }
-}
-
-
-
-// Void additions
-
-
-// Void: sided border generator
-@mixin border_side($width, $color, $side:top) {
-  border: $width solid $color;
-  @if $side!=top {border-top-width: 0;}
-  @if $side!=left {border-left-width: 0;}
-  @if $side!=right {border-right-width: 0;}
-  @if $side!=bottom {border-bottom-width: 0;}
-  //font-size: ($size / $base) * 1rem;
 }

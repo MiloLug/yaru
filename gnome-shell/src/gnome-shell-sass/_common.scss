@@ -1,8 +1,7 @@
 //This is the RIGHT PLACE to edit the stylesheet
 
 //let's start by telling people not to edit the generated CSS:
-$cakeisalie: "This stylesheet is generated, DO NOT EDIT";
-/* #{$cakeisalie} */
+
 
 /* Copyright 2009, 2015 Red Hat, Inc.
  *
@@ -22,40 +21,6 @@ $cakeisalie: "This stylesheet is generated, DO NOT EDIT";
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
-/* Global Values */
-
-// padding, margin and spacing
-$base_padding: 6px;
-$base_margin: 4px;
-$base_spacing: 6px;
-
-// border radii
-$base_border_radius: 4px; // Yaru: we want a smaller border-radius
-
-$modal_radius:$base_border_radius + 2; // Yaru: we want a smaller border-radius
-
-// non-standard colors
-$bubble_borders_color: lighten($borders_color, if($variant=='light', 0%, 5%));
-// $bubble_borders_color: if($variant == 'light', rgba(255,255,255,0.1), rgba(0,0,0,0.3));
-
-// hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
-$hover_bg_color: transparentize($fg_color, 0.9);
-$hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
-
-// active Yaru: we want the active bg to be a visible gray for dark and light shell themes
-$active_bg_color: transparentize($fg_color, 0.8);
-$active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
-$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
-
-// fonts
-$base_font_size: 11;
-$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
-
-// icons
-$base_icon_size: 1.09em;
-// $base_icon_size: 16px;
 
 // Stage
 stage {

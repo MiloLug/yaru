@@ -1,7 +1,7 @@
 $variant: 'light';
 $ambiance: true;
 
-@import 'colors';
+@import '../../../../common-scss/global';
 @import 'drawing';
 @import 'common';
 @import 'apps';

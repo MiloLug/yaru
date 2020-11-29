@@ -1,34 +1,6 @@
 @function gtkalpha($c,$a) {
   @return unquote("alpha(#{$c},#{$a})");
 }
-// padding, margin and spacing
-$base_padding: 6px;
-$base_margin: 4px;
-$base_spacing: 6px;
-
-$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$asset_suffix: if($variant=='dark', '-dark', '');
-$backdrop_transition: 200ms ease-out;
-$button_transition: all 200ms $ease-out-quad;
-// $button_radius: 4px; // Yaru change: we want everything to be less round
-// $menu_radius: 4px; // Yaru change: we want everything to be less round
-$button_radius: 0;
-$menu_radius: 0;
-//$window_radius: $button_radius + 3;
-$window_radius: 0;
-//$popover_radius: $button_radius + 2; // Yaru change: we want everything to be less round
-$popover_radius: 0;
-
-// Optional compact sizes for buttons, headerbar and headerbar widgets
-$_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', 46px, 40px);
-$_entry_height: if($_sizevariant=='default', 32px, 28px);
-$_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 6px);
-$_hb_btn_pad: if($_sizevariant=='default', 6px, 5px);
-$_img_btn_pad: if($_sizevariant=='default', 5px, 2px);
-$_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
-$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px);
-$_switch_margin: if($_sizevariant=='default', 10px, 7px);
 
 * {
   padding: 0;
@@ -1579,23 +1551,17 @@ searchbar > revealer > box {
 headerbar {
   padding: 0 6px;
   min-height: $_headerbar_height;
-//Void: borders
   border-width: 0 0 0 0;
-  //border-width: 0 0 1px;
   border-style: solid;
 
   border-color: $alt_borders_color;
   border-radius: 0;
 
-  @include headerbar_fill($headerbar_bg_color, lighten($headerbar_bg_color, 15%));
+  @include headerbar_fill($headerbar_bg_color, $headerbar_top_hilight);
 
   &:backdrop {
 //Void: hilight the window when it is backdrop    
-    @include headerbar_fill($backdrop_headerbar_bg_color, lighten($backdrop_headerbar_bg_color, 15%));
-    
-//Void: borders
-    //box-shadow: inset 0 1px $top_hilight;
-
+    @include headerbar_fill($backdrop_headerbar_bg_color, $backdrop_headerbar_top_hilight);    
     transition: $backdrop_transition;
   }
 
@@ -1617,7 +1583,7 @@ headerbar {
   stackswitcher button:checked,
   button.toggle:checked {
 
-    background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
+    background: image(darken($bg_color, 9%));
     border-color: darken($borders_color, 6%); // Yaru change: with our button styling we do not want a stronger bottom border
     // border-top-color: darken($borders_color, 8%);
     &:backdrop {
@@ -1764,7 +1730,7 @@ headerbar {
   .fullscreen & {
 
 //Void: disable window's hilightning and set background as of panel (top bar)
-    @include headerbar_fill($cod_gray);
+    @include headerbar_fill($panel_bg_color);
 
     &:backdrop {
       //@include headerbar_fill($bg_color);
@@ -1824,61 +1790,61 @@ headerbar {
     box-shadow: none;
   }
 }
+//Void: no radius!!!!
 
-.background .titlebar {
-  &:backdrop, & {
-    border-top-left-radius: $window_radius;
-    border-top-right-radius: $window_radius;
-  }
-}
+// .background .titlebar {
+//   &:backdrop, & {
+//     border-top-left-radius: $window_radius;
+//     border-top-right-radius: $window_radius;
+//     border-radius: 0;
+//   }
+// }
 
-.background.tiled .titlebar,
-.background.tiled-top .titlebar,
-.background.tiled-right .titlebar,
-.background.tiled-bottom .titlebar,
-.background.tiled-left .titlebar,
-.background.maximized .titlebar,
-.background.solid-csd .titlebar {
-  &:backdrop, & {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
+// .background.tiled .titlebar,
+// .background.tiled-top .titlebar,
+// .background.tiled-right .titlebar,
+// .background.tiled-bottom .titlebar,
+// .background.tiled-left .titlebar,
+// .background.maximized .titlebar,
+// .background.solid-csd .titlebar {
+//   &:backdrop, & {
+//     border-top-left-radius: 0;
+//     border-top-right-radius: 0;
+//   }
+// }
 
-headerbar { // headerbar border rounding
+// headerbar { // headerbar border rounding
+//   window separator:first-child + &,
+//   window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
+//   window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
+//   window stack & { // tackles the stacked headerbars case
+//     &:first-child, &:last-child {
+//       &:backdrop, & {
+//         border-top-left-radius: 7px;
+//         border-top-right-radius: 7px;
+//       }
+//     }
+//   }
 
-  window separator:first-child + &,
-  window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-  window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
-
-  window stack & { // tackles the stacked headerbars case
-    &:first-child, &:last-child {
-      &:backdrop, & {
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-      }
-    }
-  }
-
-  window.tiled &,
-  window.tiled-top &,
-  window.tiled-right &,
-  window.tiled-bottom &,
-  window.tiled-left &,
-  window.maximized &,
-  window.fullscreen &,
-  window.solid-csd & {
-    &, &:backdrop {
-      &,
-      &:first-child,
-      &:last-child,
-      &:only-child {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-    }
-  }
-}
+//   window.tiled &,
+//   window.tiled-top &,
+//   window.tiled-right &,
+//   window.tiled-bottom &,
+//   window.tiled-left &,
+//   window.maximized &,
+//   window.fullscreen &,
+//   window.solid-csd & {
+//     &, &:backdrop {
+//       &,
+//       &:first-child,
+//       &:last-child,
+//       &:only-child {
+//         border-top-left-radius: 0;
+//         border-top-right-radius: 0;
+//       }
+//     }
+//   }
+// }
 
 .titlebar:not(headerbar) {
   window.csd > & {
@@ -1896,11 +1862,11 @@ headerbar { // headerbar border rounding
   @extend %titlebar;
 }
 
-// Development versions of apps to use a differently styled headerbar
+//Void: I dont`t want it:
 
+// Development versions of apps to use a differently styled headerbar
 // window.devel {
 //   headerbar.titlebar:not(.selection-mode) {
-
 //     $c: darken($bg_color, 10%);
 //     $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
 //                linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8)),
@@ -1910,9 +1876,7 @@ headerbar { // headerbar border rounding
 //                  linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
 //                  linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
 //     }
-
 //     background: $bg_color $gradient;
-
 //     &:backdrop {
 //       background: $bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
 //                   image($bg_color); /* background-color would flash */
@@ -2664,11 +2628,6 @@ notebook {
  * Scrollbars *
  **************/
 scrollbar {
-  $_slider_min_length: 40px;
-  $_slider_min_width: 4px;
-  $_slider_full_width: 10px;
-  $_scroll_button_size: 10px;
-
   // disable steppers
   @at-root * {
     -GtkScrollbar-has-backward-stepper: false;
@@ -2693,11 +2652,11 @@ scrollbar {
 
   //Void: make the scrollbar block to be wider than the slider
   &.horizontal {
-    min-height: $_slider_full_width;
+    min-height: $_scroll_slider_full_width;
   }
 
   &.vertical {
-    min-width: $_slider_full_width;
+    min-width: $_scroll_slider_full_width;
   }
 
   // slider
@@ -2712,6 +2671,7 @@ scrollbar {
     border-radius:0;
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
+    //background-color: yellow;
 
     &:hover{ background-color: $scrollbar_slider_hover_color; }
 
@@ -2724,32 +2684,32 @@ scrollbar {
   //Void: when scrollbar in :hover state -> expand the slider
   &.vertical{
     slider{
-      margin-left: ($_slider_full_width - $_slider_min_width) / 2;
-      min-width: $_slider_min_width;
-      min-height: $_slider_min_length;
-      transition: min-width .2s;
+      margin: 0 ($_scroll_slider_full_width - $_scroll_slider_min_width) / 2;
+      min-width: $_scroll_slider_min_width;
+      min-height: $_scroll_slider_min_length;
     }
 
     &:hover, &.hovering, &.dragging{
       slider{
-        margin-left: 0;
-        min-width: $_slider_full_width;
+        margin: 0 0;
+        min-width: $_scroll_slider_full_width;
+        transition: min-width .2s;
       }
     }
   }
 
   &.horizontal{
     slider{
-      margin-top: ($_slider_full_width - $_slider_min_width) / 2;
-      min-height: $_slider_min_width;
-      min-width: $_slider_min_length;
-      transition: min-height .2s;
+      margin: ($_scroll_slider_full_width - $_scroll_slider_min_width) / 2 0;
+      min-height: $_scroll_slider_min_width;
+      min-width: $_scroll_slider_min_length;
     }
     
     &:hover, &.hovering, &.dragging{
       slider{
-        margin-top: 0;
-        min-height: $_slider_full_width;
+        margin: 0 0;
+        min-height: $_scroll_slider_full_width;
+        transition: min-height .2s;
       }
     }
   }
@@ -4600,7 +4560,9 @@ colorchooser .popover.osd { border-radius: 5px; }
  * Window Decorations *
  *********************/
 decoration {
-  border-radius: $window_radius $window_radius 0 0;
+  //Void: no radius
+  //border-radius: $window_radius $window_radius 0 0;
+  border-radius: 0 !important;
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
@@ -4656,18 +4618,24 @@ decoration {
   //.ssd & { box-shadow: 0 0 0 1px $_wm_border; } //just doing borders, wm draws actual shadows
 
   .csd.popup & {
-    border-radius: $menu_radius;
+    //Void: no radius
+    //border-radius: $menu_radius;
+    border-radius: 0;
     box-shadow: 0 1px 2px transparentize(black, 0.8);
                // 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
   tooltip.csd & {
-    border-radius: 5px;
+    //Void: no radius
+    // border-radius: 5px;
+    border-radius: 0;
     box-shadow: none;
   }
 
   messagedialog.csd & {
-    border-radius: $window_radius;
+    //Void: no radius
+    // border-radius: $window_radius;
+    border-radius: 0;
     box-shadow: 0 1px 2px transparentize(black, 0.8);
                // 0 0 0 1px transparentize($_wm_border, 0.1);
   }

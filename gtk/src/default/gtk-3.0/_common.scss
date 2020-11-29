@@ -2,16 +2,10 @@
   @return unquote("alpha(#{$c},#{$a})");
 }
 
-$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 // Until we have dark assets, just use the light ones
 //$asset_suffix: if($variant=='dark', '-dark', '');
 $asset_suffix: '';
-$small_radius: 4px;
-$medium_radius: 6px;
-$large_radius: 12px;
-$backdrop_transition: all 200ms ease-out;
-$button_transition: all 0.4s ease-out;
-$popover_shadow: 0 2px 5px transparentize(black, 0.75);
+
 
 * {
   padding: 0;
@@ -1149,15 +1143,11 @@ GtkComboBox {
   //border-style: solid;
   border-radius: 0;
   color: $headerbar_fg_color;
-  @include headerbar_fill($headerbar_bg_color, lighten($headerbar_bg_color, 15%));
+  @include headerbar_fill($headerbar_bg_color, $headerbar_top_hilight);
 
   &:backdrop {
 //Void: hilight the window when it is backdrop    
-    @include headerbar_fill($backdrop_headerbar_bg_color, lighten($backdrop_headerbar_bg_color, 15%));
-    
-//Void: borders
-    //box-shadow: inset 0 1px $top_hilight;
-
+    @include headerbar_fill($backdrop_headerbar_bg_color, $backdrop_headerbar_top_hilight);    
     transition: $backdrop_transition;
   }
 
@@ -1756,7 +1746,7 @@ column-header.button.dnd { // for treeview-like derive widgets
     transition: 100ms ease;
     transition-property: box-shadow, color;
     padding: 4px 8px;
-//Void:
+//Void: no radius
     .menu {
       //border-radius: 0 0 $small_radius $small_radius;
       border-radius: 0;
@@ -1785,7 +1775,9 @@ column-header.button.dnd { // for treeview-like derive widgets
   //Void: TEST
   //border: 1px solid $borders_color; // adds borders in a non composited env
   border: 1px solid yellow !important;
-  border-radius: $small_radius;
+  //Void: no radius
+  //border-radius: $small_radius;
+  border-radius: 0;
   .csd & { border: none; }  // axes borders in a composited env
   &:backdrop { background-color: $backdrop_menu_color; color: $backdrop_text_color; }
   .menuitem {
@@ -3034,8 +3026,10 @@ GtkCalendar {
   &.csd { // rounded bottom border styling for csd version
     &.background {
       // bigger radius for better antialiasing
-      border-bottom-left-radius: 9px;
-      border-bottom-right-radius: 9px;
+      //Void: no radius
+      // border-bottom-left-radius: 9px;
+      // border-bottom-right-radius: 9px;
+      border-radius: 0 !important;
     }
     .dialog-action-area .button {
       padding: 12px;
@@ -3098,13 +3092,17 @@ GtkCalendar {
       border-bottom-style: none;
     }
     %last_button {
-      border-bottom-right-radius: 7px;
-      outline-bottom-right-radius: 5px;
+      //Void: no radius
+      // border-bottom-right-radius: 7px;
+      // outline-bottom-right-radius: 5px;
+      border-radius: 0;
     }
     %first_button {
       border-left-style: none;
-      border-bottom-left-radius: 7px;
-      outline-bottom-left-radius: 5px;
+      //Void: no radius
+      // border-bottom-left-radius: 7px;
+      // outline-bottom-left-radius: 5px;
+      border-radius: 0;
     }
   }
 }
@@ -3480,17 +3478,18 @@ GtkVolumeButton.button {
   // with the image-button/text-button classes automagically applied depending on the button child these selectors can be deleted.
   @extend .image-button;
 
-  &.text-button { @extend .text-button }
+  &.text-button { @extend .text-button };
+
 }
 
 /**********************
  * Window Decorations *
  *********************/
 
-.window-frame {
+.window-frame, window decoration {
   //Void: NO ROUNDED CORNERS
   //border-radius: 7px 7px 0 0;
-  border-radius: 0;
+  border-radius: 0 !important;
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
@@ -3533,11 +3532,15 @@ GtkVolumeButton.button {
                   //0 0 0 1px transparentize($_wm_border,0.1);
     }
     &.tooltip {
-      border-radius: 5px;
+      //Void: no radius
+      //border-radius: 5px;
+      border-radius: 0 !important;
       box-shadow: none;
     }
     &.message-dialog {
-      border-radius: 7px;
+      //Void: no radius
+      //border-radius: 7px;
+      border-radius: 0px !important;
       box-shadow: 0 1px 2px transparentize(black, 0.8);
                   //0 0 0 1px transparentize($_wm_border,0.1);
     }

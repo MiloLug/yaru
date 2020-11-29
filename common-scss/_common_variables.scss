@@ -1,0 +1,65 @@
+/*******
+* Misc *
+********/
+// padding, margin and spacing
+$base_padding: 6px;
+$base_margin: 4px;
+$base_spacing: 6px;
+
+//animations
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$asset_suffix: if($variant=='dark', '-dark', '');
+$backdrop_transition: 200ms ease-out;
+$button_transition: all 200ms $ease-out-quad;
+
+$button_radius: 0;
+$menu_radius: 0;
+
+$window_radius: 0;
+
+$popover_radius: 0;
+
+$small_radius: 4px;
+$medium_radius: 6px;
+$large_radius: 12px;
+
+// Optional compact sizes for buttons, headerbar and headerbar widgets
+$_sizevariant: 'default'; //compact otherwise
+$_headerbar_height: if($_sizevariant=='default', 46px, 40px);
+$_entry_height: if($_sizevariant=='default', 32px, 28px);
+$_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 6px);
+$_hb_btn_pad: if($_sizevariant=='default', 6px, 5px);
+$_img_btn_pad: if($_sizevariant=='default', 5px, 2px);
+$_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
+$_circ_btn_pad: if($_sizevariant=='default', 4px, 2px);
+$_switch_margin: if($_sizevariant=='default', 10px, 7px);
+
+// border radii
+$base_border_radius: 4px; // Yaru: we want a smaller border-radius
+
+$modal_radius:$base_border_radius + 2; // Yaru: we want a smaller border-radius
+
+// hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
+$hover_bg_color: transparentize($fg_color, 0.9);
+$hover_fg_color: $fg_color;
+$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
+
+// active Yaru: we want the active bg to be a visible gray for dark and light shell themes
+$active_bg_color: transparentize($fg_color, 0.8);
+$active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
+$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
+
+// fonts
+$base_font_size: 11;
+$text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
+
+// icons
+$base_icon_size: 1.09em;
+
+/************
+* Scrollbar *
+*************/
+$_scroll_slider_min_length: 40px;
+$_scroll_slider_min_width: 4px;
+$_scroll_slider_full_width: 10px;
+$_scroll_button_size: 10px;

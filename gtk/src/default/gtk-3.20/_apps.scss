@@ -1,4 +1,4 @@
-@import "palette";
+@import "../../../../common-scss/palette";
 
 /* set $ambiance to null, unless already defined */
 $ambiance: null !default;
@@ -357,6 +357,10 @@ terminal-window {
     // gnome disks headerbar menu seems to inherit the headerbar separator bg color
     // no unique class names or id used here so this rule is as specific as it can be
     background: $borders_color;
+  }
+  headerbar button image ~ window decoration{
+    //Void: no radius
+    border-radius: 0 !important;
   }
 
   /********

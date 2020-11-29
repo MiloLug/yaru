@@ -41,5 +41,5 @@ $backdrop_borders_color: mix($borders_color, $bg_color, 90%);
 $backdrop_dark_fill: mix($backdrop_borders_color,$backdrop_bg_color, 35%);
 // Yaru: we need hc and imports to for our build to work:
 $variant: hc;
-@import "palette";
-@import "colors";
+@import "../../../common-scss/global";
+@import "../../../common-scss/colors";

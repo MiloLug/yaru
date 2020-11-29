@@ -1,5 +1,6 @@
 // Blacks
 $cod_gray: #0a0a0a;
+$cod_desaturate: desaturate($cod_gray, 100%);
 $jet: #181818;
 $inkstone: #3D3D3D;
 $slate: #5D5D5D;
@@ -34,12 +35,14 @@ $green: #0e8420;
 // Blues
 $grayed_blue: #425d67;
 $blue: #19B6EE;
+$lilac: #C8A2C8;
 $linkblue: #007aa6;
 $darkblue: #335280;
+$pink: #FFC0CB;
 
 
 // Semantic colors
 $primary_accent_bg_color: $orange;
 $primary_accent_fg_color: $white;
-$secondary_accent_bg_color: $aubergine;
+$secondary_accent_bg_color: $pink;
 $secondary_accent_fg_color: $white;

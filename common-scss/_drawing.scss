@@ -1,0 +1,23 @@
+// headerbar fill
+//
+// $c:  base color
+// $hc: top highlight color
+// $ov: a background layer for background shorthand (hence no commas!)
+//
+@mixin headerbar_fill($c:$headerbar_color, $hc:transparent, $ov: none) {
+  $gradient: linear-gradient(to top, $c, $c); // Yaru change: no gradients
+
+  @if $ov != none { background: $c $ov, $gradient; }
+  @else { background: $c $gradient; }
+  
+  box-shadow: inset 0 2px $hc; // top highlight
+}
+
+// Void: sided border generator
+@mixin border_side($width, $color, $side:top) {
+  border: $width solid $color;
+  @if $side!=top {border-top-width: 0;}
+  @if $side!=left {border-left-width: 0;}
+  @if $side!=right {border-right-width: 0;}
+  @if $side!=bottom {border-bottom-width: 0;}
+}

@@ -1,6 +1,6 @@
 $variant: '@ThemeVariant@';
 
-@import "gnome-shell-sass/_colors"; //use gtk colors
+@import "../../../common-scss/_global.scss"; //use gtk colors
 @import "gnome-shell-sass/_drawing";
 @import "gnome-shell-sass/_common";
 @import "gnome-shell-sass/_widgets";

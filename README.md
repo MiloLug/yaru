@@ -5,6 +5,8 @@ options "default" and "light" = false (meson_options)
 
 removed "default" flavour from gtk/meson.build
 
+
+Common colors and palette is added (and variables, drawing etc...) :)
 ## TODO
 - global:
   - clean up the styles... oh my GOD help me on this way of blood tears
