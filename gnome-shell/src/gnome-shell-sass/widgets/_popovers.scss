@@ -1,25 +1,6 @@
 /* Popovers/Menus */
-//Void:
-$popover_padding_start: $base_padding * 3;
-$popover_padding_end: $base_padding * 5;
 
-$popover_arrow_height: 12px;
-
-//.the popover itself
 .popup-menu-boxpointer {
-  //-arrow-border-radius: $base_border_radius + 2; // Yaru: we have less round popovers
-// //Void:
-//   -arrow-border-radius: 0;
-//   -arrow-background-color: darken($bg_color, 50%);
-//   -arrow-border-width: 1px;
-//   //-arrow-border-color: if($variant=='light', transparentize(black, 0.65), $borders_color); // Yaru: we need a black-based border for the light theme
-// //Void:
-//   -arrow-border-color: $borders_color; // Yaru: we need a black-based border for the light theme
-//   -arrow-base: $popover_arrow_height * 2;
-//   -arrow-rise: $popover_arrow_height;
-//   -arrow-box-shadow: 0px 11px 19px 7px rgba(0, 0, 0, 0.5), 
-//                       inset 0px 2px white; // dreaming bugzilla #689995
-
   -arrow-border-radius: 0;
   -arrow-background-color: transparent;
   -arrow-border-width: 0;
@@ -28,8 +9,8 @@ $popover_arrow_height: 12px;
   -arrow-rise: 0;
 
   padding: 0;
-  background-color: lighten($panel_bg_color, 4%);
-  @include border_side(2px, lighten($panel_bg_color, 50%), bottom);
+  background-color: $popover_bg_color;
+  @include border_side(2px, $popover_underline_color, bottom);
 //                       inset 0px 2px white; // dreaming bugzilla #689995
 }
 

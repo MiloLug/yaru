@@ -1729,12 +1729,8 @@ headerbar {
   .maximized &,
   .fullscreen & {
 
-//Void: disable window's hilightning and set background as of panel (top bar)
+//Void: disable window's hilightning
     @include headerbar_fill($panel_bg_color);
-
-    &:backdrop {
-      //@include headerbar_fill($bg_color);
-    }
   }
 
   &.default-decoration {
@@ -1790,61 +1786,7 @@ headerbar {
     box-shadow: none;
   }
 }
-//Void: no radius!!!!
 
-// .background .titlebar {
-//   &:backdrop, & {
-//     border-top-left-radius: $window_radius;
-//     border-top-right-radius: $window_radius;
-//     border-radius: 0;
-//   }
-// }
-
-// .background.tiled .titlebar,
-// .background.tiled-top .titlebar,
-// .background.tiled-right .titlebar,
-// .background.tiled-bottom .titlebar,
-// .background.tiled-left .titlebar,
-// .background.maximized .titlebar,
-// .background.solid-csd .titlebar {
-//   &:backdrop, & {
-//     border-top-left-radius: 0;
-//     border-top-right-radius: 0;
-//   }
-// }
-
-// headerbar { // headerbar border rounding
-//   window separator:first-child + &,
-//   window &:first-child { &:backdrop, & { border-top-left-radius: 7px; }}
-//   window &:last-child { &:backdrop, & { border-top-right-radius: 7px; }}
-//   window stack & { // tackles the stacked headerbars case
-//     &:first-child, &:last-child {
-//       &:backdrop, & {
-//         border-top-left-radius: 7px;
-//         border-top-right-radius: 7px;
-//       }
-//     }
-//   }
-
-//   window.tiled &,
-//   window.tiled-top &,
-//   window.tiled-right &,
-//   window.tiled-bottom &,
-//   window.tiled-left &,
-//   window.maximized &,
-//   window.fullscreen &,
-//   window.solid-csd & {
-//     &, &:backdrop {
-//       &,
-//       &:first-child,
-//       &:last-child,
-//       &:only-child {
-//         border-top-left-radius: 0;
-//         border-top-right-radius: 0;
-//       }
-//     }
-//   }
-// }
 
 .titlebar:not(headerbar) {
   window.csd > & {
@@ -1861,28 +1803,6 @@ headerbar {
 
   @extend %titlebar;
 }
-
-//Void: I dont`t want it:
-
-// Development versions of apps to use a differently styled headerbar
-// window.devel {
-//   headerbar.titlebar:not(.selection-mode) {
-//     $c: darken($bg_color, 10%);
-//     $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-//                linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.8)),
-//                linear-gradient(to top, darken($c, 3%), $c 3px, lighten($c, 6%));
-//     @if $variant == 'dark' {
-//       $gradient: cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-//                  linear-gradient(to right, transparent 65%, transparentize($selected_bg_color, 0.9)),
-//                  linear-gradient(to top, lighten($c, 3%) 3px, lighten($c, 5%));
-//     }
-//     background: $bg_color $gradient;
-//     &:backdrop {
-//       background: $bg_color cross-fade(10% -gtk-icontheme("system-run-symbolic"), image(transparent)) 90% 0/256px 256px no-repeat,
-//                   image($bg_color); /* background-color would flash */
-//     }
-//   }
-// }
 
 /************
  * Pathbars *
@@ -2181,19 +2101,21 @@ menubar,
 
 menu,
 .menu,
-//Void: TODO cod gray -> panel_bg_color
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
   padding: 4px 0px;
   // background-color: $menu_color;
   // border: 1px solid $borders_color; // adds borders in a non composited env
-  background-color: lighten($cod_gray, 4%);
-  @include border_side(2px, lighten($cod_gray, 50%), bottom);
+  background-color: $popover_bg_color;
+  @include border_side(2px, $popover_underline_color, bottom);
+  //border: none !important;
   margin-bottom: $base_padding;
+  //Void:
+  //padding-bottom: $base_padding + $base_margin;
 
   .csd & {
-    border: none; // axes borders in a composited env
-    border-radius: $menu_radius;
+    //border: none; // axes borders in a composited env
+    //border-radius: $menu_radius;
   }
 
   &:backdrop { background-color: $backdrop_menu_color; }
@@ -2201,12 +2123,14 @@ menu,
   menuitem {
     min-height: 16px;
     min-width: 40px;
-    padding: 4px 6px;
+    padding: 4px $ctx_padding_end 4px $ctx_padding_start;
     text-shadow: none;
-
+    //VOID
     &:hover {
-      color: $selected_fg_color;
-      background-color: $selected_bg_color;
+      background-color: $hover_bg_color;
+      color: $fg_color;
+      @include border_side(2px, $selected_bg_color, left);
+      padding-left: $ctx_padding_start - 2px;
     }
 
     &:disabled {
@@ -2296,34 +2220,25 @@ menuitem {
 /***************
  * Popovers   *
  ***************/
-//Void: TODO replace cod gray by panel_bg_color
+ 
 popover.background {
   //padding: 2px;
   padding:0;
   background-color: $popover_bg_color;
-  .csd &, & {
-    
+  .csd &, & { 
     //border: 1px solid $borders_color;
     //border-radius: $popover_radius;
     border-radius: 0;
-    background-color: lighten($cod_gray, 4%);
-    @include border_side(2px, lighten($cod_gray, 50%), bottom);
+    background-color: $popover_bg_color;
+    @include border_side(2px, $popover_underline_color, bottom);
     margin-bottom: $base_padding;
   }
 
-  .csd & {
-    //border: 2px solid white;
-    //$_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
 
-    //background-clip: padding-box;
-    //border-color: $_popover_border;
-  }
-
-  box-shadow: 0 1px 2px transparentize(black, 0.7);
-//Void: TODO replace the backdrop color by the popover backdrop color
+  //box-shadow: 0 1px 2px transparentize(black, 0.7);
   &:backdrop {
-    background-color: $backdrop_bg_color;
-    box-shadow: 0 1px 2px transparentize(black, 0.8);
+    background-color: $backdrop_popover_bg_color;
+    //box-shadow: 0 1px 2px transparentize(black, 0.8);
   }
 
   > list,
@@ -2338,7 +2253,7 @@ popover.background {
     &.magnifier {
       @extend %osd;
 
-      border: 1px solid transparentize(white, 0.9);
+      //border: 1px solid transparentize(white, 0.9);
 
       button { @extend %osd_button };
     }
@@ -2661,18 +2576,11 @@ scrollbar {
 
   // slider
   slider {
-    // min-width: 4px;
-    // min-height: 4px;
-    // //margin: -1px;
-    //border: 4px solid transparent;
     border:none;
-    //Void: no ROUNDS
-    //border-radius: 8px;
     border-radius:0;
     background-clip: padding-box;
     background-color: $scrollbar_slider_color;
-    //background-color: yellow;
-
+    
     &:hover{ background-color: $scrollbar_slider_hover_color; }
 
     &:hover:active { background-color: $scrollbar_slider_active_color; }
@@ -3981,22 +3889,16 @@ messagedialog { // Message Dialog styling
     background-image: none;
     background-color: $bg_color;
     border-style: none;
-    // border-top-left-radius: 7px;
-    // border-top-right-radius: 7px;
     border-radius: 0;
   }
 
-  &.csd { // rounded bottom border styling for csd version
+  &.csd {
     &.background {
-      // bigger radius for better antialiasing
-      //Void:
-      // border-bottom-left-radius: $window_radius+1;
-      // border-bottom-right-radius: $window_radius+1;
       border-radius:0;
     }
 
     .dialog-action-area button {
-      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
+      padding: 10px 14px;
       border-right-style: none;
       border-bottom-style: none;
       border-radius: 0;
@@ -4560,8 +4462,6 @@ colorchooser .popover.osd { border-radius: 5px; }
  * Window Decorations *
  *********************/
 decoration {
-  //Void: no radius
-  //border-radius: $window_radius $window_radius 0 0;
   border-radius: 0 !important;
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
@@ -4575,22 +4475,7 @@ decoration {
   // box-shadow: 0 3px 9px 1px transparentize(black, 0.5),
   //             0 0 0 1px $_wm_border; //doing borders with box-shadow
 
-  // FIXME rationalize shadows
-
-  // this is used for the resize cursor area
   margin: 10px;
-
-//Void: remove borders around the window:
-  // &:backdrop {
-  //   // the transparent shadow here is to enforce that the shadow extents don't
-  //   // change when we go to backdrop, to prevent jumping windows.
-  //   // The biggest shadow should be in the same order then in the active state
-  //   // or the jumping will happen during the transition.
-  //   box-shadow: 0 3px 9px 1px transparent,
-  //               0 2px 6px 2px transparentize(black, 0.8),
-  //               0 0 0 1px $_wm_border_backdrop;
-  //   transition: $backdrop_transition;
-  // }
 
 //Void: add window shadows
   box-shadow: 0 3px 9px 1px transparentize(black, 0.5);
@@ -4614,30 +4499,19 @@ decoration {
 
   .popup & { box-shadow: none; }
 
-  // server-side decorations as used by mutter
-  //.ssd & { box-shadow: 0 0 0 1px $_wm_border; } //just doing borders, wm draws actual shadows
-
   .csd.popup & {
-    //Void: no radius
-    //border-radius: $menu_radius;
     border-radius: 0;
     box-shadow: 0 1px 2px transparentize(black, 0.8);
-               // 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
   tooltip.csd & {
-    //Void: no radius
-    // border-radius: 5px;
     border-radius: 0;
     box-shadow: none;
   }
 
   messagedialog.csd & {
-    //Void: no radius
-    // border-radius: $window_radius;
     border-radius: 0;
     box-shadow: 0 1px 2px transparentize(black, 0.8);
-               // 0 0 0 1px transparentize($_wm_border, 0.1);
   }
 
   .solid-csd & {

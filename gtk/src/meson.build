@@ -60,6 +60,8 @@ foreach flavour: flavours
     gtk3_scss_dependencies = run_command(
         'find', sources_relative_path, '-name', '_*.scss'
         ).stdout().strip().split('\n')
+#Void: add global deps
+    gtk3_scss_dependencies += common_scss_deps
 
     gtk_css = []
     generated_css = []

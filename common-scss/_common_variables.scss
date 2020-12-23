@@ -39,22 +39,25 @@ $base_border_radius: 4px; // Yaru: we want a smaller border-radius
 
 $modal_radius:$base_border_radius + 2; // Yaru: we want a smaller border-radius
 
-// hover Yaru: we want the hover bg to be a visible gray for dark and light shell themes
-$hover_bg_color: transparentize($fg_color, 0.9);
-$hover_fg_color: $fg_color;
-$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
-
-// active Yaru: we want the active bg to be a visible gray for dark and light shell themes
-$active_bg_color: transparentize($fg_color, 0.8);
-$active_fg_color: darken($fg_color,if($variant=='light', 5%, 3%));
-$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
-
 // fonts
 $base_font_size: 11;
 $text_shadow_color: if($variant == 'light', rgba(255,255,255,0.3), rgba(0,0,0,0.2));
 
 // icons
 $base_icon_size: 1.09em;
+
+/***********
+* Popovers *
+************/
+$popover_padding_start: $base_padding * 3;
+$popover_padding_end: $base_padding * 5;
+$popover_arrow_height: 12px;
+
+/**************
+* Contextmenu *
+***************/
+$ctx_padding_start: $base_padding;
+$ctx_padding_end: $base_padding * 1.5;
 
 /************
 * Scrollbar *

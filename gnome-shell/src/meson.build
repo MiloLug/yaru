@@ -18,6 +18,9 @@ theme_sources = files(
     'find', meson.current_source_dir(), '-name', '*.scss'
   ).stdout().strip().split('\n')
 )
+#Void: add global deps
+theme_sources += common_scss_deps
+
 assert(theme_sources.length() > 0, 'No theme sources found')
 
 source_deps = []

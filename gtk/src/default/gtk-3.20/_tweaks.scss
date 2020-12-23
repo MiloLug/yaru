@@ -145,18 +145,6 @@ button.titlebutton:not(.appmenu) {
   }
 }
 
-// we prefered our gray hover for menus and popovers, orange is a very strong color
-menu,
-.menu,
-.context-menu {
-  menuitem {
-
-    &:hover {
-      color: $fg_color;
-      background-color: $popover_hover_color;
-    }
-  }
-}
 
 // We don't want menuitems to look like links, we should propose this upstream
 menubar,
@@ -175,7 +163,9 @@ menubar,
   padding: 10px;
   margin: 12px;
   color: $text_color;
-  border-radius: $menu_radius;
+  //Void: NO RADIUS
+  // border-radius: $menu_radius;
+  border-radius: 0;
   background: none;
   background-color: $menu_color;
   border: 1px solid $borders_color;
@@ -372,9 +362,9 @@ levelbar {
 decoration {
   $_wm_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
   .csd.popup & {
-    border-radius: $menu_radius;
-    box-shadow: 0 1px 2px 1px transparentize(black, 0.7),
-                0 0 0 1px $_wm_border;
+    border-radius: 0;
+    box-shadow: 0 1px 2px 1px transparentize(black, 0.7);
+                //0 0 0 1px $_wm_border;
   }
 }
 

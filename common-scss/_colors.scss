@@ -7,7 +7,7 @@
 ***************/
 $light: if($variant=='light', true, false);
 
-$base_color: lighten($cod_desaturate, 2%);
+$base_color: lighten($cod_desaturate, 7%);
 $bg_color: lighten($cod_desaturate, 0.5%);
 $fg_color: lighten($cod_desaturate, 80%);
 $text_color: white;
@@ -45,8 +45,9 @@ $top_hilight: transparent;
 //menu
 $menu_color: lighten($cod_desaturate, 10%);
 //popovers
-$popover_bg_color: lighten($cod_desaturate, 10%);
+$popover_bg_color: lighten($cod_desaturate, 4%);
 $popover_hover_color: transparentize($fg_color, 0.85);
+$popover_underline_color: lighten($cod_desaturate, 50%);
 //sidebar
 $sidebar_bg_color: mix($bg_color, $base_color, 50%);
 
@@ -121,13 +122,21 @@ $menubar_bg_color: $headerbar_bg_color;
 /*********
 * States *
 **********/
+
 //hover:
 $base_hover_color: transparentize(white, 0.8);
-$hover_fg_color: lighten($selected_fg_color, .25);
+// $hover_fg_color: lighten($selected_fg_color, .25);
+
+$hover_bg_color: transparentize($fg_color, 0.9);
+$hover_fg_color: $fg_color;
+$hover_borders_color: lighten($borders_color,if($variant=='light', 5%, 3%));
 
 //active:
 $base_active_color: transparentize(white, 0.75);
-$active_fg_color: transparentize($selected_fg_color, .5);
+// $active_fg_color: transparentize($selected_fg_color, .5);
+$active_bg_color: transparentize($fg_color, 0.8);
+$active_fg_color: darken($fg_color, 3%);
+$active_borders_color: darken($borders_color,if($variant=='light', 5%, 3%));
 
 //insensitive:
 $insensitive_fg_color: mix($fg_color, $bg_color, 50%);
@@ -145,13 +154,20 @@ $backdrop_fg_color: mix($fg_color, $bg_color, 70%);
 $backdrop_selected_fg_color: mix($selected_fg_color, $backdrop_base_color, 80%);
 $backdrop_borders_color: mix($borders_color, $backdrop_bg_color, 40%);
 $backdrop_dark_fill: mix($dark_fill, $backdrop_base_color, 80%);
+
 //sidebar
 $backdrop_sidebar_bg_color: mix($backdrop_bg_color, $backdrop_base_color, 80%);
+
 //scrollbar
 $backdrop_scrollbar_bg_color: darken($backdrop_bg_color, 3%);
 $backdrop_scrollbar_slider_color: mix($backdrop_fg_color, $backdrop_bg_color, 40%);
+
 //menu
 $backdrop_menu_color: mix($menu_color, $backdrop_base_color, 80%);
+
+//popovers
+$backdrop_popover_bg_color: mix($backdrop_bg_color, $popover_bg_color, 50%);
+
 //headerbar
 $backdrop_headerbar_bg_color: lighten($headerbar_bg_color, 5%);
 $backdrop_headerbar_fg_color: mix($headerbar_fg_color, $backdrop_headerbar_bg_color, 70%);
